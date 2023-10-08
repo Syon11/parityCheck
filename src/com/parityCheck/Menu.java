@@ -31,7 +31,16 @@ public class Menu {
         return Sanitizer.sanitizeIntWithBounds(1, options.size());
     }
 
+    /*THIS FUNCTION REQUIRES EDITION FROM DEV MANAGING THE MENUS*/
     private void executeOption(){
 
+        switch (chosenOption) {
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+        }
     }
 }
