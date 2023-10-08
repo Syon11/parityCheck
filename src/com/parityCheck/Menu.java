@@ -28,7 +28,7 @@ public class Menu {
 
     private int askOption(){
         System.out.print("Please enter a selection from the above menu: ");
-        return Sanitizer.sanitizeInt();
+        return Sanitizer.sanitizeIntWithBounds(1, options.size());
     }
 
     private void executeOption(){
