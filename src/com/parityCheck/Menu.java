@@ -33,14 +33,21 @@ public class Menu {
 
     /*THIS FUNCTION REQUIRES EDITION FROM DEV MANAGING THE MENUS*/
     private void executeOption(){
-
+        Parity exec;
         switch (chosenOption) {
             case 1:
+                exec = new ParityFromString();
                 break;
             case 2:
+                exec = new ParityFromManualMatrix();
                 break;
             case 3:
+                exec = new ParityFromFileMatrix();
+                break;
+            default:
+                exec = new ParityFullFile();
                 break;
         }
+        exec.run();
     }
 }

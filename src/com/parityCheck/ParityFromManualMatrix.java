@@ -1,4 +1,8 @@
 package com.parityCheck;
 
-public class ParityFromManualMatrix {
+public class ParityFromManualMatrix extends Parity {
+    @Override
+    public void run() {
+
+    }
 }
