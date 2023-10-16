@@ -11,11 +11,11 @@ public class Parser {
 
     public ArrayList<String> splitMessage(){
         ArrayList<String> messages = new ArrayList<>();
-
+        int loops = calcLoops();
         if(unformattedString.length() > 8){
-            for (int i = calcLoops(); i > 0; i--){
+            for (int i = loops-1; i >= 0; i--){
                 messages.add(unformattedString.substring(i*8));
-                
+                unformattedString = unformattedString.substring(0,i*8);
             }
             return messages;
         }

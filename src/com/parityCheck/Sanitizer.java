@@ -58,14 +58,15 @@ public class Sanitizer {
     public static String sanitizeString(){
         Scanner scanner = new Scanner(System.in);
         String sanitizedString = "";
-        while(!scanner.hasNextLine()){
-            sanitizedString = scanner.nextLine();
-            if (sanitizedString.isEmpty()){
-                System.out.println("Please enter a line");
-                continue;
+
+        while(true){
+            if (scanner.hasNextLine()){
+                sanitizedString = scanner.nextLine();
+                break;
             }
-            break;
+            System.out.println("Please enter a line");
         }
+
         return sanitizedString;
     }
 
