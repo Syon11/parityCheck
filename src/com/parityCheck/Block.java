@@ -101,4 +101,19 @@ public class Block {
         return line;
     }
 
+    public String decode() {
+        String part = "";
+        int currentTotal;
+        for(int i = 0; i < blockSize; i++) {
+            currentTotal = 0;
+            for(int j = 7; j >= 0; j--) {
+                if (block[i][j]){
+                    currentTotal += Math.pow(2, 7-j);
+                }
+            }
+            part = part + (char)currentTotal;
+        }
+        return part;
+    }
+
 }

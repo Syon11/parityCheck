@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Menu {
-    Encoder exec;
-    ParityChecker checker;
+    Program program;
     private boolean active = true;
     private int chosenOption = 0;
     private ArrayList<String> options = new ArrayList<>();
@@ -16,9 +15,9 @@ public class Menu {
             displayMenu();
             chosenOption = askOption();
             selectOption();
-            exec.run();
-
-
+            if(active){
+                program.run();
+            }
         }while(active);
     }
 
@@ -40,16 +39,10 @@ public class Menu {
     private void selectOption(){
         switch (chosenOption) {
             case 1:
-                exec = new EncoderFromString();
-                break;
-            case 2:
-                exec = new EncoderFromManualMatrix();
-                break;
-            case 3:
-                exec = new EncoderFromFileMatrix();
+                program = new Program();
                 break;
             default:
-                exec = new EncoderFullFile();
+                active = false;
                 break;
         }
     }

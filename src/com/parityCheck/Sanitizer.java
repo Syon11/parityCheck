@@ -4,61 +4,23 @@ import java.util.Scanner;
 
 public class Sanitizer {
     public static int sanitizeInt(){
-        Scanner scanner = new Scanner(System.in);
-        int sanitizedInput = 0;
-
-        while(!scanner.hasNextInt()){
-            System.out.println("ERROR: Command entered is not an integer");
-            scanner.nextLine();
-            System.out.println("Please enter an integer");
-        }
-        sanitizedInput = scanner.nextInt();
-
-
-        return sanitizedInput;
+        return takeIntEntry();
     }
 
     public static int sanitizeIntWithBounds(int lowerBound, int... upperBound) {
-        Scanner scanner = new Scanner(System.in);
         int sanitizedInput = 0;
         boolean valid = false;
 
-        while (true) {
-            while (!scanner.hasNextInt()) {
-                System.out.println("ERROR: Command entered is not an integer");
-                scanner.nextLine();
-                if (upperBound.length > 0) {
-                    System.out.println("Please enter an integer between " + lowerBound + " and " + upperBound[0]);
-                    continue;
-                }
-                System.out.println("Please enter an integer equal or above to " + lowerBound);
-            }
-            sanitizedInput = scanner.nextInt();
-            System.out.println(sanitizedInput);
-            if (upperBound.length > 0) {
-                if (sanitizedInput >= lowerBound && sanitizedInput <= upperBound[0]) {
-                    break;
-                }
-                System.out.println("ERROR: Entry out of bounds");
-                System.out.println("Please enter an integer between " + lowerBound + " and " + upperBound[0]);
-                scanner.nextLine();
-                continue;
-            }
-            if (sanitizedInput >= lowerBound){
-                break;
-            }
-            System.out.println("ERROR: Entry out of bounds");
-            System.out.println("Please enter an integer above " + lowerBound);
-            scanner.nextLine();
+        while (!valid) {
+            sanitizedInput = takeIntEntry();
+            valid = testOutOfBounds(sanitizedInput, lowerBound, upperBound);
         }
         return sanitizedInput;
     }
-
 
     public static String sanitizeString(){
         Scanner scanner = new Scanner(System.in);
         String sanitizedString = "";
-
         while(true){
             if (scanner.hasNextLine()){
                 sanitizedString = scanner.nextLine();
@@ -66,8 +28,32 @@ public class Sanitizer {
             }
             System.out.println("Please enter a line");
         }
-
         return sanitizedString;
     }
 
+    private static int takeIntEntry(){
+        Scanner scanner = new Scanner(System.in);
+        int entry;
+        while (!scanner.hasNextInt()) {
+            System.out.println("ERROR: Command entered is not an integer");
+            scanner.nextLine();
+        }
+        entry = scanner.nextInt();
+        return entry;
+    }
+
+    private static boolean testOutOfBounds(int testedInput, int lowerBound, int... upperBound) {
+        if (upperBound.length > 0) {
+            if (testedInput >= lowerBound && testedInput <= upperBound[0]) {
+                return true;
+            }
+            System.out.println("ERROR: Entry out of bounds\nPlease enter an integer between " + lowerBound + " and " + upperBound[0]);
+            return false;
+        }
+        if (testedInput >= lowerBound){
+            return true;
+        }
+        System.out.println("ERROR: Entry out of bounds\nPlease enter an integer above " + lowerBound);
+        return false;
+    }
 }
